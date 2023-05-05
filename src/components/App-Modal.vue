@@ -1,16 +1,28 @@
 <template>
-    <div class="backdrop">
+    <!-- click.self => not effect in child div only in self div -->
+    <div class="backdrop" @click.self="closeDrop">
         <!-- success => class name : theme data -->
         <div class="modal" :class="{success:theme === 'success', danger:theme === 'danger'}">
-            <h1>{{ header }}</h1>
-            <p>{{ content }}</p>
+            <!-- slot get data from model child-->
+            <slot>
+                <!-- defalut work when there is no slot -->
+                default
+            </slot>
+            <!-- slot with name -->
+            <slot name="links"/>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        props : ['header', 'del', 'content', 'theme'],
+        props : ['theme'],
+        
+        methods :{
+            closeDrop(){
+                this.$emit("close");
+            }
+        }
     }
 </script>
     
