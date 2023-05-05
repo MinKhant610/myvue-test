@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1 ref="name">Vue</h1>
+  <button @click="changeName">click</button>
+  <Modal :header="header" del="Are you sure want to delete?" :content="content" :theme="theme"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+// Modal => any name
+import Modal from "./components/App-Modal.vue"
+  export default {
+    data(){
+      return {
+        name : "MinKhant",
+        header : "Login success",
+        content : "Welcome Min Khant",
+        theme : "success",
+      }
+    },
+    methods :{
+      changeName(){
+        this.$refs.name.textContent = this.name;
+      }
+    },
+    components:{
+      Modal
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<!-- scoped mean css effect are only effect in curret file -->
+<style scoped>
+  h1{
+    color: aqua;
+  }
 </style>
